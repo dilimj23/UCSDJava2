@@ -53,7 +53,23 @@ public abstract class Document {
 		// TODO: Implement this method so that you can call it from the 
 	    // getNumSyllables method in BasicDocument (module 1) and 
 	    // EfficientDocument (module 2).
-	    return 0;
+		char[] wordarray = word.toCharArray();
+		int wordcount = 0;
+		char prev = 0;
+		for (int i = 0; i < wordarray.length; i++) {
+			char cur = wordarray[i];
+		    if (i > 0) prev = wordarray[i-1];
+			if (cur!='e' || i!=wordarray.length-1) {
+				if ("aoeuiyAOEUIY".contains(""+cur)) {
+					if (!"aoeuiyAOEUIY".contains(""+prev)) {
+						wordcount++;
+					}
+				}	
+			} else if (wordcount == 0) {
+				wordcount++;
+			}
+		}
+	    return wordcount;
 	}
 	
 	/** A method for testing
@@ -117,7 +133,12 @@ public abstract class Document {
 	public double getFleschScore()
 	{
 	    // TODO: Implement this method
-	    return 0.0;
+		double score = 0.0;
+		double nWords = getNumWords();
+		double nSens = getNumSentences();
+		double nSyl = getNumSyllables();
+		score = 206.835 - 1.015 * nWords / nSens - 84.6 * nSyl / nWords; 
+	    return score;
 	}
 	
 	

@@ -30,7 +30,8 @@ public class BasicDocument extends Document
 	{
 		//TODO: Implement this method.  See the Module 1 support videos 
 	    // if you need help.
-	    return 0;
+		List<String> words = this.getTokens("[a-zA-Z]+");
+	    return words.size();
 	}
 	
 	/**
@@ -46,7 +47,8 @@ public class BasicDocument extends Document
 	{
 	    //TODO: Implement this method.  See the Module 1 support videos 
         // if you need help.
-        return 0;
+		List<String> sentences = this.getTokens("[.?!]+|([^.?!]$)");
+        return sentences.size();
 	}
 	
 	/**
@@ -62,7 +64,12 @@ public class BasicDocument extends Document
 	{
 	    //TODO: Implement this method.  See the Module 1 support videos 
         // if you need help.
-        return 0;
+		List<String> words = this.getTokens("[a-zA-Z]+");
+		int numsyl = 0;
+		for (String word : words) {
+			numsyl += countSyllables(word);
+		}
+        return numsyl;
 	}
 	
 	
