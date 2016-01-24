@@ -54,14 +54,15 @@ public abstract class Document {
 	    // getNumSyllables method in BasicDocument (module 1) and 
 	    // EfficientDocument (module 2).
 		char[] wordarray = word.toCharArray();
+		String syllet = "aoeuiyAOEUIY";
 		int wordcount = 0;
 		char prev = 0;
 		for (int i = 0; i < wordarray.length; i++) {
 			char cur = wordarray[i];
 		    if (i > 0) prev = wordarray[i-1];
 			if (cur!='e' || i!=wordarray.length-1) {
-				if ("aoeuiyAOEUIY".contains(""+cur)) {
-					if (!"aoeuiyAOEUIY".contains(""+prev)) {
+				if (syllet.contains(String.valueOf(cur))) {
+					if (!syllet.contains(String.valueOf(prev))) {
 						wordcount++;
 					}
 				}	

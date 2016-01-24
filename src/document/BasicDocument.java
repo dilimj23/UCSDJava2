@@ -47,7 +47,8 @@ public class BasicDocument extends Document
 	{
 	    //TODO: Implement this method.  See the Module 1 support videos 
         // if you need help.
-		List<String> sentences = this.getTokens("[.?!]+|([^.?!]$)");
+		//List<String> sentences = this.getTokens("[.?!]+|([^.?!]$)");
+		List<String> sentences = this.getTokens("[^.!?]+");
         return sentences.size();
 	}
 	
