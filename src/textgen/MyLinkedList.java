@@ -17,6 +17,11 @@ public class MyLinkedList<E> extends AbstractList<E> {
 	/** Create a new empty LinkedList */
 	public MyLinkedList() {
 		// TODO: Implement this method
+		size = 0;
+		head = new LLNode<E>(null);
+		tail = new LLNode<E>(null); //use sentinel nodes
+		head.next = tail;
+		tail.prev = head;
 	}
 
 	/**
@@ -26,7 +31,16 @@ public class MyLinkedList<E> extends AbstractList<E> {
 	public boolean add(E element ) 
 	{
 		// TODO: Implement this method
-		return false;
+		if (element == null) {
+			return false;
+		}
+		LLNode<E> node = new LLNode<E>(element);
+		node.prev = tail.prev;
+		tail.prev.next = node;
+		tail.prev = node;
+		node.next = tail;
+		size++;
+ 		return true;
 	}
 
 	/** Get the element at position index 
@@ -34,7 +48,16 @@ public class MyLinkedList<E> extends AbstractList<E> {
 	public E get(int index) 
 	{
 		// TODO: Implement this method.
-		return null;
+		if (index < 0 || index >= size) {
+			throw new IndexOutOfBoundsException("Index out of bound!");
+		}
+		LLNode<E> node = head.next;
+		int i = 0;
+		while (i < index) {
+			node = node.next;
+			i++;
+		}
+		return node.data;
 	}
 
 	/**
@@ -79,6 +102,13 @@ public class MyLinkedList<E> extends AbstractList<E> {
 		// TODO: Implement this method
 		return null;
 	}   
+	
+//	public static void main(String[] args) {
+//		MyLinkedList<String> shortList = new MyLinkedList<String>();
+//		shortList.add("A");
+//		shortList.add("B");
+//		System.out.println(shortList.get(1));
+//	}
 }
 
 class LLNode<E> 
