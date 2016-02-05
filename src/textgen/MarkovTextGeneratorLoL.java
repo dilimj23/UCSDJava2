@@ -33,6 +33,26 @@ public class MarkovTextGeneratorLoL implements MarkovTextGenerator {
 	public void train(String sourceText)
 	{
 		// TODO: Implement this method
+		String[] words = sourceText.split("[\\s]+");
+		starter = words[0];
+		String prevWord = starter;
+		for (int i = 1; i < words.length; i++) {
+			String w = words[i];
+			Boolean existed = false;
+			for (ListNode node : wordList) {
+				if (node.getWord().equals(prevWord)) {
+					node.addNextWord(w);
+					existed = true;
+				}
+			}
+			if (existed == false) {
+				ListNode newnode = new ListNode(prevWord);
+				wordList.add(newnode);
+				newnode.addNextWord(w);
+			}
+			prevWord = w;
+		}
+		
 	}
 	
 	/** 
